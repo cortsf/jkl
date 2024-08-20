@@ -54,7 +54,7 @@ esac
 # Scan
 case $OPERATIONS in
     "s") git secrets --list && sleep 2 && git secrets --scan -r ./ 
-    # sleeps for the user to get informed of any existing/non-existing rules.
+    # sleeps for the user to get informed of any existing/non-existing secrets provider/s.
 esac
 
 # Diff
