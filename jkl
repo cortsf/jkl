@@ -1,4 +1,3 @@
-#!/usr/bin/env bash
 
 cd ~/.dotfiles/ || exit 1
 
@@ -84,7 +83,7 @@ esac
 
 # Commit
 case $OPERATIONS in
-    "h"|"k"|"l") git commit -a -m  "switch_configuration from '$machine' at: $(date '+%Y_%m_%d-%T')";;
+    "h"|"k"|"l") git commit -a -m  "switch_configuration from '$machine' at: $(date '+%Y_%m_%d-%T')" && sleep 1;;
 esac
 
 # Push
