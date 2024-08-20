@@ -6,33 +6,21 @@ machine="$HOSTNAME"
 clear -x
 git status
 tput sc
-echo -ne "$(tput setab 000; tput setaf 4)\n=================================== Select operations to perform on $(tput setaf 3)${machine}$(tput setaf 4)"
-tput el
-echo -ne "\n"
-tput el
-echo -ne "\na - stage (all)"
-tput el
-echo -ne "\ns - scan"
-tput el
-echo -ne "\nd - diff"
-tput el
-echo -ne "\nf - fetch"
-tput el
-echo -ne "\ng - merge (origin/main)"
-tput el
-echo -ne "\nh - commit & push"
-tput el
-echo -ne "\n"
-tput el
-echo -ne "\nj - rebuild"
-tput el
-echo -ne "\nk - commit, push & rebuild"
-tput el
-echo -ne "\nl - commit, push, update flake.lock & rebuild"
-tput el
-echo -ne "\n"
-tput el
-echo -ne "\n$(tput setaf 5)"
+
+echo -ne "$(tput setab 000; tput setaf 4)\n=================================== Select operations to perform on $(tput setaf 3)${machine}$(tput setaf 4)$(tput el)"
+echo -ne "\n$(tput el)"
+echo -ne "\na - stage (all)$(tput el)"
+echo -ne "\ns - scan$(tput el)"
+echo -ne "\nd - diff$(tput el)"
+echo -ne "\nf - fetch$(tput el)"
+echo -ne "\ng - merge (origin/main)$(tput el)"
+echo -ne "\nh - commit & push$(tput el)"
+echo -ne "\n$(tput el)"
+echo -ne "\nj - rebuild$(tput el)"
+echo -ne "\nk - commit, push & rebuild$(tput el)"
+echo -ne "\nl - commit, push, update flake.lock & rebuild$(tput el)"
+echo -ne "\n$(tput el)"
+echo -ne "\n$(tput el)"
 read -r -n 1 OPERATIONS
 
 tput rc
