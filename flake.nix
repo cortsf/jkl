@@ -12,7 +12,7 @@
       packages.${system}.default = pkgs.writeShellApplication {
         name = "jkl";
         text = builtins.readFile ./jkl;
-        bashOptions = [ ];
+        # bashOptions = [ ];
       };
     };
 }
