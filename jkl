@@ -38,7 +38,7 @@ read -r -n 1 OPERATIONS
 
 
 case $OPERATIONS in
-    "a") echo -ne " ================================> Stage (everything)";;
+    "a") echo -ne " ================================> Stage (all)";;
     "s") echo -ne " ================================> Scan";;
     "d") echo -ne " ================================> Diff";;
     "f") echo -ne " ================================> Fetch";;
@@ -56,7 +56,7 @@ echo -e "$(tput sgr0)\n"
 
 # Stage
 case $OPERATIONS in
-    "a") git add .; jkl "$@"
+    "a") git add .; sleep 0.4 && jkl "$@"
 esac
 
 
