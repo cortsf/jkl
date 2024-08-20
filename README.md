@@ -1,3 +1,6 @@
+# Assumptions
+- `~/.dotfiles/nixos/flake.nix` providing `nixosConfigurations.<HOSTNAME>` (See #2 & #3)
+
 # Usage
 
 ``` bash
