@@ -1,0 +1,105 @@
+#!/usr/bin/env bash
+
+cd ~/.dotfiles/ || exit 1
+
+machine="$HOSTNAME"
+
+clear -x
+git status
+
+echo -ne "$(tput setab 000; tput setaf 4)\n=================================== Select operations to perform on $(tput setaf 3)${machine}$(tput setaf 4)"
+tput el
+echo -ne "\n"
+tput el
+echo -ne "\na - stage (all)"
+tput el
+echo -ne "\ns - scan"
+tput el
+echo -ne "\nd - diff"
+tput el
+echo -ne "\nf - fetch"
+tput el
+echo -ne "\ng - merge (origin/main)"
+tput el
+echo -ne "\nh - commit & push"
+tput el
+echo -ne "\n"
+tput el
+echo -ne "\nj - rebuild"
+tput el
+echo -ne "\nk - commit, push & rebuild"
+tput el
+echo -ne "\nl - commit, push, update flake.lock & rebuild"
+tput el
+echo -ne "\n"
+tput el
+echo -ne "\n$(tput setaf 5)"
+read -r -n 1 OPERATIONS
+
+
+case $OPERATIONS in
+    "a") echo -ne " ================================> Stage (everything)";;
+    "s") echo -ne " ================================> Scan";;
+    "d") echo -ne " ================================> Diff";;
+    "f") echo -ne " ================================> Fetch";;
+    "g") echo -ne " ================================> Merge (origin)";;
+    "h") echo -ne " ================================> Commit & push";;
+    "j") echo -ne " ================================> Rebuild $machine";;
+    "k") echo -ne " ================================> Commit, push & rebuild $machine";;
+    "l") echo -ne " ================================> Commit, push, update flake.lock & rebuild $machine";;
+    *) tput el; echo ""; exit 1 ;;
+
+esac
+
+tput el
+echo -e "$(tput sgr0)\n"
+
+# Stage
+case $OPERATIONS in
+    "a") git add .; jkl "$@"
+esac
+
+
+# Scan
+case $OPERATIONS in
+    "s") git secrets --list && sleep 2 && git secrets --scan -r ./
+esac
+
+# Diff
+case $OPERATIONS in
+    "d") git diff --color=always | less; jkl "$@"
+esac
+
+# Fetch
+case $OPERATIONS in
+    "f") git fetch
+esac
+
+# Merge
+case $OPERATIONS in
+    "g") git merge origin/main
+esac
+
+# Commit
+case $OPERATIONS in
+    "h"|"k"|"l") git commit -a -m  "switch_configuration from '$machine' at: $(date '+%Y_%m_%d-%T')";;
+esac
+
+# Push
+case $OPERATIONS in
+    "h"|"k"|"l") git push;;
+esac
+
+# Update flake.lock
+case $OPERATIONS in
+    "l") sudo nix flake update;;
+esac
+
+# Do not build
+case $OPERATIONS in
+    "a"|"s"|"d"|"f"|"g"|"h") exit 0
+esac
+
+sudo nixos-rebuild --max-jobs "$(nproc)" --flake "$HOME/.dotfiles/nixos#$machine" switch "$@"
+
+ 
