@@ -83,7 +83,7 @@ esac
 
 # Commit
 case $OPERATIONS in
-    "h"|"k"|"l") git commit -a -m  "switch_configuration from '$machine' at: $(date '+%Y_%m_%d-%T')" && sleep 1;;
+    "h"|"k"|"l") git commit -a -m  "switch_configuration from '$machine' at: $(date '+%Y_%m_%d-%T')";;
 esac
 
 # # Push
