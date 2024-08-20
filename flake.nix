@@ -11,6 +11,7 @@
     {
       packages.${system}.default = pkgs.writeShellApplication {
         name = "jkl";
+        runtimeInputs = [ pkgs.git ];
         text = builtins.readFile ./jkl;
       };
     };
