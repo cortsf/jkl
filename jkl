@@ -56,13 +56,15 @@ echo -e "$(tput sgr0)\n"
 
 # Stage
 case $OPERATIONS in
-    "a") git add .; sleep 0.4 && jkl "$@"
+    "a") git add .; sleep 0.4 && jkl "$@" 
+    # sleeps for user to notice the message.
 esac
 
 
 # Scan
 case $OPERATIONS in
-    "s") git secrets --list && sleep 2 && git secrets --scan -r ./
+    "s") git secrets --list && sleep 2 && git secrets --scan -r ./ 
+    # sleeps for the user to get informed of any existing/non-existings rules.
 esac
 
 # Diff
