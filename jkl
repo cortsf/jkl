@@ -37,18 +37,18 @@ read -r -n 1 OPERATIONS
 
 tput rc
 tput ed
-echo "$(tput setaf 5)"
+tput setaf 5
 
 case $OPERATIONS in
-    "a") echo -ne "a ================================> Stage (all)";;
-    "s") echo -ne "s ================================> Scan";;
-    "d") echo -ne "d ================================> Diff";;
-    "f") echo -ne "f ================================> Fetch";;
-    "g") echo -ne "g ================================> Merge (origin)";;
-    "h") echo -ne "h ================================> Commit & push";;
-    "j") echo -ne "j ================================> Rebuild $machine";;
-    "k") echo -ne "k ================================> Commit, push & rebuild $machine";;
-    "l") echo -ne "l ================================> Commit, push, update flake.lock & rebuild $machine";;
+    "a") echo -ne "\na ================================> Stage (all)";;
+    "s") echo -ne "\ns ================================> Scan";;
+    "d") echo -ne "\nd ================================> Diff";;
+    "f") echo -ne "\nf ================================> Fetch";;
+    "g") echo -ne "\ng ================================> Merge (origin)";;
+    "h") echo -ne "\nh ================================> Commit & push";;
+    "j") echo -ne "\nj ================================> Rebuild $machine";;
+    "k") echo -ne "\nk ================================> Commit, push & rebuild $machine";;
+    "l") echo -ne "\nl ================================> Commit, push, update flake.lock & rebuild $machine";;
     *) tput el; echo ""; exit 1 ;;
 
 esac
