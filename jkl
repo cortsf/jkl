@@ -92,7 +92,7 @@ esac
 
 # Update flake.lock
 case $OPERATIONS in
-    "l") sudo nix flake update;;
+    "l") cd nixos && sudo nix flake update;;
 esac
 
 # Do not build
