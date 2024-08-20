@@ -95,11 +95,10 @@ case $OPERATIONS in
     "l") cd nixos && sudo nix flake update;;
 esac
 
-# Do not build
+# Build
 case $OPERATIONS in
-    "a"|"s"|"d"|"f"|"g"|"h") exit 0
+    "j"|"k"|"l") sudo nixos-rebuild --max-jobs "$(nproc)" --flake "$HOME/.dotfiles/nixos#$machine" switch "$@"
 esac
 
-sudo nixos-rebuild --max-jobs "$(nproc)" --flake "$HOME/.dotfiles/nixos#$machine" switch "$@"
 
  
