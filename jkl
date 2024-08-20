@@ -6,7 +6,7 @@ machine="$HOSTNAME"
 
 clear -x
 git status
-
+tput sc
 echo -ne "$(tput setab 000; tput setaf 4)\n=================================== Select operations to perform on $(tput setaf 3)${machine}$(tput setaf 4)"
 tput el
 echo -ne "\n"
@@ -36,17 +36,20 @@ tput el
 echo -ne "\n$(tput setaf 5)"
 read -r -n 1 OPERATIONS
 
+tput rc
+tput ed
+echo "$(tput setaf 5)"
 
 case $OPERATIONS in
-    "a") echo -ne " ================================> Stage (all)";;
-    "s") echo -ne " ================================> Scan";;
-    "d") echo -ne " ================================> Diff";;
-    "f") echo -ne " ================================> Fetch";;
-    "g") echo -ne " ================================> Merge (origin)";;
-    "h") echo -ne " ================================> Commit & push";;
-    "j") echo -ne " ================================> Rebuild $machine";;
-    "k") echo -ne " ================================> Commit, push & rebuild $machine";;
-    "l") echo -ne " ================================> Commit, push, update flake.lock & rebuild $machine";;
+    "a") echo -ne "a ================================> Stage (all)";;
+    "s") echo -ne "s ================================> Scan";;
+    "d") echo -ne "d ================================> Diff";;
+    "f") echo -ne "f ================================> Fetch";;
+    "g") echo -ne "g ================================> Merge (origin)";;
+    "h") echo -ne "h ================================> Commit & push";;
+    "j") echo -ne "j ================================> Rebuild $machine";;
+    "k") echo -ne "k ================================> Commit, push & rebuild $machine";;
+    "l") echo -ne "l ================================> Commit, push, update flake.lock & rebuild $machine";;
     *) tput el; echo ""; exit 1 ;;
 
 esac
