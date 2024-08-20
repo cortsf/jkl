@@ -87,9 +87,9 @@ case $OPERATIONS in
 esac
 
 # # Push
-# case $OPERATIONS in
-#     "h"|"k"|"l") git push;;
-# esac
+case $OPERATIONS in
+    "h"|"k"|"l") git push;;
+esac
 
 # Update flake.lock
 case $OPERATIONS in
