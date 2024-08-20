@@ -1,7 +1,7 @@
 # Usage
 
 ``` bash
-jkl [extra-args passed to nixos-rebuild]
+jkl [extra args passed to nixos-rebuild]
 ```
 
 # Deps
