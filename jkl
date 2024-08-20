@@ -101,4 +101,4 @@ case $OPERATIONS in
     "j"|"k"|"l") sudo nixos-rebuild --max-jobs "$(nproc)" --flake "$HOME/.dotfiles/nixos#$machine" switch "$@"
 esac
 
-# bye!!
+# bye!!!
