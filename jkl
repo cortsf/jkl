@@ -12,6 +12,7 @@ echo -ne "\n$(tput el)"
 echo -ne "\na - stage (all)$(tput el)"
 echo -ne "\ns - scan$(tput el)"
 echo -ne "\nd - diff$(tput el)"
+echo -ne "\nD - diff origin$(tput el)"
 echo -ne "\nf - fetch$(tput el)"
 echo -ne "\ng - merge (origin/main)$(tput el)"
 echo -ne "\nh - commit & push$(tput el)"
@@ -31,6 +32,7 @@ case $OPERATIONS in
     "a") echo -ne "\na ================================> Stage (all)";;
     "s") echo -ne "\ns ================================> Scan";;
     "d") echo -ne "\nd ================================> Diff";;
+    "D") echo -ne "\nD ================================> Diff origin";;
     "f") echo -ne "\nf ================================> Fetch";;
     "g") echo -ne "\ng ================================> Merge (origin)";;
     "h") echo -ne "\nh ================================> Commit & push";;
@@ -60,6 +62,11 @@ esac
 # Diff
 case $OPERATIONS in
     "d") git diff --color=always | less; jkl "$@"
+esac
+
+# Diff origin
+case $OPERATIONS in
+    "D") git diff origin/main --color=always | less; jkl "$@"
 esac
 
 # Fetch
