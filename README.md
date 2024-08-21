@@ -10,7 +10,34 @@
 $ jkl [extra args passed to nixos-rebuild]
 ```
 
+`jkl` will show:
+
+1. git status
+2. A menu with the following options:
+
+``` 
+=================================== Select operations to perform on <HOSTNAME>
+a - stage (all)"
+s - scan"
+d - diff"
+f - fetch"
+g - merge (origin/main)"
+h - commit & push"
+
+j - rebuild"
+k - commit, push & rebuild"
+l - commit, push, update flake.lock & rebuild"
+```
+
+After hitting any of `a`,`s`,`d`,`f`,`j`,`k`,`l`, the menu options will disappear, leaving the git status, one colored line message showing the option you choosed:
+
+``` 
+h ================================> Commit & push"
+```
+
+And the outpout of the choosen actions being performed, after this line.
+
+`a - stage` and `d - diff` are recursive, after the choosen actions (stage/diff..) are perfomed the menu opens again, with the git status updated in case of `a - stage`.
+
 # Extra deps
 Only `s - scan` requires [git-secrets](https://github.com/awslabs/git-secrets)
-
-
