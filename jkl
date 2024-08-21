@@ -46,7 +46,7 @@ case $OPERATIONS in
     "j") show_choosen_option "j ================================> Rebuild $machine";;
     "k") show_choosen_option "k ================================> Commit, push & rebuild $machine";;
     "l") show_choosen_option "l ================================> Commit, push, update flake.lock & rebuild $machine";;
-    "L") true;; # Show message later
+    "L") true;; # Show message later, after reading more user input.
     *) tput el; echo ""; exit 1 ;;
 
 esac
