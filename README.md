@@ -47,7 +47,7 @@ And the outpout of the choosen actions being performed, after this line.
 Before choosing action/s:
 ![alt text](https://github.com/cortsf/jkl/blob/main/jkl1.png?raw=true)
 
-After choosing action/s:
+After choosing action/s with `j`:
 ![alt text](https://github.com/cortsf/jkl/blob/main/jkl2.png?raw=true)
 
 # Extra deps
