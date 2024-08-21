@@ -12,7 +12,8 @@ echo -ne "\n$(tput el)"
 echo -ne "\na - stage (all)$(tput el)"
 echo -ne "\ns - scan$(tput el)"
 echo -ne "\nd - diff unstaged$(tput el)"
-echo -ne "\nD - diff origin$(tput el)"
+echo -ne "\nD - diff staged$(tput el)"
+echo -ne "\ne - diff origin$(tput el)"
 echo -ne "\nf - fetch$(tput el)"
 echo -ne "\ng - merge origin$(tput el)"
 echo -ne "\nh - commit & push$(tput el)"
@@ -20,6 +21,7 @@ echo -ne "\n$(tput el)"
 echo -ne "\nj - rebuild$(tput el)"
 echo -ne "\nk - commit, push & rebuild$(tput el)"
 echo -ne "\nl - commit, push, update flake.lock & rebuild$(tput el)"
+echo -ne "\nL - update invididual <input>$(tput el)"
 echo -ne "\n$(tput el)"
 echo -ne "\n$(tput el)"
 read -r -n 1 OPERATIONS
@@ -32,13 +34,15 @@ case $OPERATIONS in
     "a") echo -ne "\na ================================> Stage (all)";;
     "s") echo -ne "\ns ================================> Scan";;
     "d") echo -ne "\nd ================================> Diff unstaged";;
-    "D") echo -ne "\nD ================================> Diff origin";;
+    "D") echo -ne "\nD ================================> Diff staged";;
+    "D") echo -ne "\ne ================================> Diff origin";;
     "f") echo -ne "\nf ================================> Fetch";;
     "g") echo -ne "\ng ================================> Merge origin";;
     "h") echo -ne "\nh ================================> Commit & push";;
     "j") echo -ne "\nj ================================> Rebuild $machine";;
     "k") echo -ne "\nk ================================> Commit, push & rebuild $machine";;
     "l") echo -ne "\nl ================================> Commit, push, update flake.lock & rebuild $machine";;
+    "L") true;;
     *) tput el; echo ""; exit 1 ;;
 
 esac
@@ -59,14 +63,19 @@ case $OPERATIONS in
     # sleeps for the user to get informed of any existing/non-existing secrets provider/s.
 esac
 
-# Diff
+# Diff unstaged
 case $OPERATIONS in
     "d") git diff --color=always | less; jkl "$@"
 esac
 
+# Diff staged
+case $OPERATIONS in
+    "D") git diff --cached --color=always | less; jkl "$@"
+esac
+
 # Diff origin
 case $OPERATIONS in
-    "D") git diff origin/main --color=always | less; jkl "$@"
+    "e") git diff origin/main --color=always | less; jkl "$@"
 esac
 
 # Fetch
@@ -92,6 +101,13 @@ esac
 # Update flake.lock
 case $OPERATIONS in
     "l") cd ~/.dotfiles/nixos && sudo nix flake update;;
+esac
+
+# Update individual input
+case $OPERATIONS in
+    "L") read input_name 
+	 echo -ne "\nL ================================> Update input $input_name"
+	 nix flake update "$input_name"
 esac
 
 # Build
