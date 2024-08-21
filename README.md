@@ -21,9 +21,10 @@ $ jkl [extra args passed to nixos-rebuild]
 =================================== Select operations to perform on <HOSTNAME>
 a - stage (all)
 s - scan
-d - diff
+d - diff unstaged
+D - diff origin
 f - fetch
-g - merge (origin/main)
+g - merge origin
 h - commit & push
 
 j - rebuild

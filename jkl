@@ -11,10 +11,10 @@ echo -ne "$(tput setab 000; tput setaf 4)\n=================================== S
 echo -ne "\n$(tput el)"
 echo -ne "\na - stage (all)$(tput el)"
 echo -ne "\ns - scan$(tput el)"
-echo -ne "\nd - diff$(tput el)"
+echo -ne "\nd - diff unstaged$(tput el)"
 echo -ne "\nD - diff origin$(tput el)"
 echo -ne "\nf - fetch$(tput el)"
-echo -ne "\ng - merge (origin/main)$(tput el)"
+echo -ne "\ng - merge origin$(tput el)"
 echo -ne "\nh - commit & push$(tput el)"
 echo -ne "\n$(tput el)"
 echo -ne "\nj - rebuild$(tput el)"
@@ -31,10 +31,10 @@ tput setaf 5
 case $OPERATIONS in
     "a") echo -ne "\na ================================> Stage (all)";;
     "s") echo -ne "\ns ================================> Scan";;
-    "d") echo -ne "\nd ================================> Diff";;
+    "d") echo -ne "\nd ================================> Diff unstaged";;
     "D") echo -ne "\nD ================================> Diff origin";;
     "f") echo -ne "\nf ================================> Fetch";;
-    "g") echo -ne "\ng ================================> Merge (origin)";;
+    "g") echo -ne "\ng ================================> Merge origin";;
     "h") echo -ne "\nh ================================> Commit & push";;
     "j") echo -ne "\nj ================================> Rebuild $machine";;
     "k") echo -ne "\nk ================================> Commit, push & rebuild $machine";;
