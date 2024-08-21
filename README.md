@@ -39,7 +39,7 @@ h ================================> Commit & push"
 
 And the outpout of the choosen actions being performed, after this line.
 
-`a - stage` and `d - diff` are recursive, after the choosen actions (stage/diff..) are perfomed the menu opens again, with the git status updated in case of `a - stage`.
+`a - stage` and `d - diff` are recursive, after the choosen actions (`git add .` / `git diff --color=always | less`) are perfomed the menu opens again, with the git status updated in case of `a - stage`.
 
 
 `jkl` Doesn't clears the scrollback buffer of your terminal, meaning, at any time after using jkl, (at least, before you kill/clear your terminal) you can inspect both the git status, the choosen action/s from the menu, and the output of the choosen actions. Just like with regular git used from a terminal.
