@@ -30,25 +30,29 @@ tput rc
 tput ed
 tput setaf 5
 
+show_choosen_option () {
+    echo -ne "\n$1$(tput el)$(tput sgr0)\n"
+}
+
 case $OPERATIONS in
-    "a") echo -ne "\na ================================> Stage (all)";;
-    "s") echo -ne "\ns ================================> Scan";;
-    "d") echo -ne "\nd ================================> Diff unstaged";;
-    "D") echo -ne "\nD ================================> Diff staged";;
-    "D") echo -ne "\ne ================================> Diff origin";;
-    "f") echo -ne "\nf ================================> Fetch";;
-    "g") echo -ne "\ng ================================> Merge origin";;
-    "h") echo -ne "\nh ================================> Commit & push";;
-    "j") echo -ne "\nj ================================> Rebuild $machine";;
-    "k") echo -ne "\nk ================================> Commit, push & rebuild $machine";;
-    "l") echo -ne "\nl ================================> Commit, push, update flake.lock & rebuild $machine";;
+    "a") show_choosen_option "a ================================> Stage (all)";;
+    "s") show_choosen_option "s ================================> Scan";;
+    "d") show_choosen_option "d ================================> Diff unstaged";;
+    "D") show_choosen_option "D ================================> Diff staged";;
+    "D") show_choosen_option "e ================================> Diff origin";;
+    "f") show_choosen_option "f ================================> Fetch";;
+    "g") show_choosen_option "g ================================> Merge origin";;
+    "h") show_choosen_option "h ================================> Commit & push";;
+    "j") show_choosen_option "j ================================> Rebuild $machine";;
+    "k") show_choosen_option "k ================================> Commit, push & rebuild $machine";;
+    "l") show_choosen_option "l ================================> Commit, push, update flake.lock & rebuild $machine";;
     "L") true;;
     *) tput el; echo ""; exit 1 ;;
 
 esac
 
-tput el
-echo -e "$(tput sgr0)\n"
+# tput el
+# echo -e "$(tput sgr0)\n"
 
 # Stage
 case $OPERATIONS in
@@ -105,9 +109,13 @@ esac
 
 # Update individual input
 case $OPERATIONS in
-    "L") read input_name 
-	 echo -ne "\nL ================================> Update input $input_name"
-	 nix flake update "$input_name"
+    "L") 
+	tput sc
+	read -r -e -p "$(tput setaf 5)input name: $(tput setaf 3)" input_name
+	tput rc
+	show_choosen_option "L ================================> Update input: $(tput setaf 3)$input_name"
+	echo ""
+	nix flake update "$input_name"
 esac
 
 # Build
