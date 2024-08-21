@@ -4,6 +4,8 @@
 - The user doesn't mind automatically generated commit messages. Uses other tools for anything else.
 - The user benefits from having some quick shortcuts only to perform the most common/repetitive tasks on a dotfiles repo. Uses other tools for anything else.
 
+Some flexibility could be added in the future, but the idea is to keep this tool as dumb and simple as possible. Check [#7](https://github.com/cortsf/jkl/issues/7)
+
 # Usage
 
 ``` bash
