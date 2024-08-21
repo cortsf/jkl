@@ -53,6 +53,8 @@ After choosing action/s with `j`:
 # Note on the program's name (`jkl`)
 It's not a joke. These three consecutive keys used to write the program name on a terminal, the `<Control-J>` you can use to submit the program on most terminals, and any of the (most likely to be used) `j`,`k`,`l` actions, can be pressed in sequence with a gesture of the hand, that doesn't even qualifies as writing. It takes less than a second to use this command, if you memorize at least the action/s that you use the most.
 
+This allows to commit & push any minuscule tweak in you configuration, almost for free. Which is specially useful in a multi computer setup sharing the same configuration.
+
 # Extra deps
 Only `s - scan` requires [git-secrets](https://github.com/awslabs/git-secrets). You have to provide a secrets provider, using for example: 
 
