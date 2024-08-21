@@ -51,4 +51,9 @@ After choosing action/s with `j`:
 ![alt text](https://github.com/cortsf/jkl/blob/main/jkl2.png?raw=true)
 
 # Extra deps
-Only `s - scan` requires [git-secrets](https://github.com/awslabs/git-secrets)
+Only `s - scan` requires [git-secrets](https://github.com/awslabs/git-secrets). You have to provide a secrets provider, using for example: 
+
+``` bash
+git secrets --add-provider -- cat ~/.my_secrets
+```
+
