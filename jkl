@@ -71,7 +71,7 @@ esac
 
 # Diff staged
 case $OPERATIONS in
-    "D") git diff --cached --color=always | less; jkl "$@"
+    "D") git diff --staged --color=always | less; jkl "$@"
 esac
 
 # Diff origin
