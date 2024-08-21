@@ -43,6 +43,12 @@ And the outpout of the choosen actions being performed, after this line.
 
 
 `jkl` Doesn't clears your terminal, meaning, at any time after using jkl, (at least, before you kill/clear your terminal) you can inspect both the git status, the choosen action/s from the menu, and the output of the choosen actions. Just like with regular git used from a terminal.
+# Screenshots
+Before choosing action/s:
+![alt text](https://github.com/cortsf/jkl/blob/main/jkl1.png?raw=true)
+
+After choosing action/s:
+![alt text](https://github.com/cortsf/jkl/blob/main/jkl2.png?raw=true)
 
 # Extra deps
 Only `s - scan` requires [git-secrets](https://github.com/awslabs/git-secrets)
