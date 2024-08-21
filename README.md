@@ -31,7 +31,7 @@ k - commit, push & rebuild
 l - commit, push, update flake.lock & rebuild
 ```
 
-After hitting any of `a`,`s`,`d`,`f`,`g`,`h`,`j`,`k`,`l`, the menu options will disappear, leaving the git status, one colored line message showing the option you choosed:
+After hitting any of `a`,`s`,`d`,`f`,`g`,`h`,`j`,`k`,`l`, the menu options will disappear, leaving the output of git status, one colored line message showing the option you choosed:
 
 ``` 
 h ================================> Commit & push
