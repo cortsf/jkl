@@ -17,16 +17,16 @@ $ jkl [extra args passed to nixos-rebuild]
 
 ``` 
 =================================== Select operations to perform on <HOSTNAME>
-a - stage (all)"
-s - scan"
-d - diff"
-f - fetch"
-g - merge (origin/main)"
-h - commit & push"
+a - stage (all)
+s - scan
+d - diff
+f - fetch
+g - merge (origin/main)
+h - commit & push
 
-j - rebuild"
-k - commit, push & rebuild"
-l - commit, push, update flake.lock & rebuild"
+j - rebuild
+k - commit, push & rebuild
+l - commit, push, update flake.lock & rebuild
 ```
 
 After hitting any of `a`,`s`,`d`,`f`,`g`,`h`,`j`,`k`,`l`, the menu options will disappear, leaving the git status, one colored line message showing the option you choosed:
