@@ -114,7 +114,6 @@ case $OPERATIONS in
 	tput ed
 	tput rc
 	show_choosen_option "L ================================> Update input: $(tput setaf 3)$input_name"
-	echo ""
 	nix flake update "$input_name"
 esac
 
