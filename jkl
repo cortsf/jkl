@@ -28,10 +28,10 @@ read -r -n 1 OPERATIONS
 
 tput rc
 tput ed
-tput setaf 5
+
 
 show_choosen_option () {
-    echo -ne "\n$1$(tput el)$(tput sgr0)\n"
+    echo -ne "$(tput sgr0)$(tput setaf 5)\n$1$(tput el)$(tput sgr0)\n\n"
 }
 
 case $OPERATIONS in
@@ -50,9 +50,6 @@ case $OPERATIONS in
     *) tput el; echo ""; exit 1 ;;
 
 esac
-
-# tput el
-# echo -e "$(tput sgr0)\n"
 
 # Stage
 case $OPERATIONS in
@@ -111,7 +108,10 @@ esac
 case $OPERATIONS in
     "L") 
 	tput sc
-	read -r -e -p "$(tput setaf 5)input name: $(tput setaf 3)" input_name
+	echo ""
+	read -r -p "$(tput setab 0)$(tput setaf 5)input name: $(tput setaf 3)$(tput el)" input_name
+	tput sgr0
+	tput ed
 	tput rc
 	show_choosen_option "L ================================> Update input: $(tput setaf 3)$input_name"
 	echo ""
