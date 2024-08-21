@@ -14,7 +14,7 @@ $ jkl [extra args passed to nixos-rebuild]
 
 `jkl` will show:
 
-1. git status followed by:
+1. `git status` followed by:
 2. A menu with the following options:
 
 ``` 
