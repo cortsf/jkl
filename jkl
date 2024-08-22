@@ -68,18 +68,18 @@ main_menu () {
 	git push
     elif [[ "$OPERATIONS" == "j" ]]; then
 	show_choosen_option "j ================================> Rebuild $machine"
-	do_rebuild
+	do_rebuild "$@"
     elif [[ "$OPERATIONS" == "k" ]]; then
 	show_choosen_option "k ================================> Commit, push & rebuild $machine"
 	do_commit
 	git push
-	do_rebuild
+	do_rebuild "$@"
     elif [[ "$OPERATIONS" == "l" ]]; then
 	show_choosen_option "l ================================> Commit, push, update flake.lock & rebuild $machine"
 	do_commit
 	git push
 	nix flake update
-	do_rebuild
+	do_rebuild "$@"
     elif [[ "$OPERATIONS" == "L" ]]; then
 	tput sc
 	echo ""
