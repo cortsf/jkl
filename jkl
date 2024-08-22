@@ -6,6 +6,14 @@ show_choosen_option () {
     echo -ne "$(tput sgr0)$(tput setaf 5)\n$1$(tput el)$(tput sgr0)\n\n"
 }
 
+do_commit () {
+    git commit -a -m "Switch configuration from '$machine' at: $(date '+%Y_%m_%d-%T')"
+}
+
+do_rebuild () {
+    sudo nixos-rebuild --max-jobs "$(nproc)" --flake "$HOME/.dotfiles/nixos#$machine" switch "$@"
+}
+
 main_menu () {
     tput sc
     echo -ne "$(tput setab 000; tput setaf 4)\n=================================== Select operations to perform on $(tput setaf 3)${machine}$(tput setaf 4)$(tput el)"
@@ -29,94 +37,61 @@ main_menu () {
     tput rc
     tput ed
     tput sgr0
-    case $OPERATIONS in
-	"a") show_choosen_option "a ================================> Stage (all)";;
-	"s") show_choosen_option "s ================================> Scan";;
-	"d") show_choosen_option "d ================================> Diff unstaged";;
-	"D") show_choosen_option "D ================================> Diff staged";;
-	"e") show_choosen_option "e ================================> Diff origin";;
-	"f") show_choosen_option "f ================================> Fetch";;
-	"g") show_choosen_option "g ================================> Merge origin";;
-	"h") show_choosen_option "h ================================> Commit & push";;
-	"j") show_choosen_option "j ================================> Rebuild $machine";;
-	"k") show_choosen_option "k ================================> Commit, push & rebuild $machine";;
-	"l") show_choosen_option "l ================================> Commit, push, update flake.lock & rebuild $machine";;
-	"L") true;; # Show message later, after reading more user input.
-	*) tput el; echo ""; exit 1 ;;
-    esac
-
-    # Stage
-    case $OPERATIONS in
-	"a") git add . ; sleep 0.4 && main "$@" 
-             # sleeps for user to notice the message.
-    esac
-
-    # Scan
-    case $OPERATIONS in
-	"s") git secrets --list && sleep 2 && git secrets --scan -r "$(git rev-parse --show-toplevel)"
-             # sleeps for the user to get informed of any existing/non-existing secrets provider/s.
-    esac
-
-    # Diff unstaged
-    case $OPERATIONS in
-	"d") git diff --color=always | less; main "$@"
-    esac
-
-    # Diff staged
-    case $OPERATIONS in
-	"D") git diff --staged --color=always | less; main "$@"
-    esac
-
-    # Diff origin
-    case $OPERATIONS in
-	"e") git diff origin/main --color=always | less; main "$@"
-    esac
-
-    # Fetch
-    case $OPERATIONS in
-	"f") 
-	    fetch_out="$(git fetch 2>&1 >/dev/null)"
-	    [[ "${#fetch_out}" -gt "0" ]] && git diff origin/main --color=always | less
-	    main "$@"
-    esac
-
-    # Merge
-    case $OPERATIONS in
-	"g") git merge origin/main
-    esac
-
-    # Commit
-    case $OPERATIONS in
-	"h"|"k"|"l") git commit -a -m  "Switch configuration from '$machine' at: $(date '+%Y_%m_%d-%T')";;
-    esac
-
-    # Push
-    case $OPERATIONS in
-	"h"|"k"|"l") git push;;
-    esac
-
-    # Update flake.lock
-    case $OPERATIONS in
-	"l") nix flake update;;
-    esac
-
-    # Update individual input
-    case $OPERATIONS in
-	"L") 
-	    tput sc
-	    echo ""
-	    read -r -p "$(tput setab 0)$(tput setaf 5)input name: $(tput setaf 3)$(tput el)" input_name
-	    tput sgr0
-	    tput ed
-	    tput rc
-	    show_choosen_option "L ================================> Update input: $(tput setaf 3)$input_name"
-	    nix flake update "$input_name"
-    esac
-
-    # Build
-    case $OPERATIONS in
-	"j"|"k"|"l") sudo nixos-rebuild --max-jobs "$(nproc)" --flake "$HOME/.dotfiles/nixos#$machine" switch "$@"
-    esac
+    if [[ "$OPERATIONS" == "a" ]]; then
+	show_choosen_option "a ================================> Stage (all)"
+	git add . ; sleep 0.4 && main "$@" 
+	# sleeps for user to notice the message.
+    elif [[ "$OPERATIONS" == "s" ]]; then
+	show_choosen_option "s ================================> Scan"
+	git secrets --list && sleep 2 && git secrets --scan -r "$(git rev-parse --show-toplevel)"
+        # sleeps for the user to get informed of any existing/non-existing secrets provider/s.
+    elif [[ "$OPERATIONS" == "d" ]]; then
+	show_choosen_option "d ================================> Diff unstaged"
+	git diff --color=always | less; main "$@"
+    elif [[ "$OPERATIONS" == "D" ]]; then
+	show_choosen_option "D ================================> Diff staged"
+	git diff --staged --color=always | less; main "$@"
+    elif [[ "$OPERATIONS" == "e" ]]; then
+	show_choosen_option "e ================================> Diff origin"
+	git diff origin/main --color=always | less; main "$@"
+    elif [[ "$OPERATIONS" == "f" ]]; then
+	show_choosen_option "f ================================> Fetch"
+	fetch_out="$(git fetch 2>&1 >/dev/null)"
+	[[ "${#fetch_out}" -gt "0" ]] && git diff origin/main --color=always | less
+	main "$@"
+    elif [[ "$OPERATIONS" == "g" ]]; then
+	show_choosen_option "g ================================> Merge origin"
+	git merge origin/main
+    elif [[ "$OPERATIONS" == "h" ]]; then
+	show_choosen_option "h ================================> Commit & push"
+	do_commit
+	git push
+    elif [[ "$OPERATIONS" == "j" ]]; then
+	show_choosen_option "j ================================> Rebuild $machine"
+	do_rebuild
+    elif [[ "$OPERATIONS" == "k" ]]; then
+	show_choosen_option "k ================================> Commit, push & rebuild $machine"
+	do_commit
+	git push
+	do_rebuild
+    elif [[ "$OPERATIONS" == "l" ]]; then
+	show_choosen_option "l ================================> Commit, push, update flake.lock & rebuild $machine"
+	do_commit
+	git push
+	nix flake update
+	do_rebuild
+    elif [[ "$OPERATIONS" == "L" ]]; then
+	tput sc
+	echo ""
+	read -r -p "$(tput setab 0)$(tput setaf 5)input name: $(tput setaf 3)$(tput el)" input_name
+	tput sgr0
+	tput ed
+	tput rc
+	show_choosen_option "L ================================> Update input: $(tput setaf 3)$input_name"
+	nix flake update "$input_name"
+    else
+	tput el; echo ""; exit 1
+    fi
 }
 
 
