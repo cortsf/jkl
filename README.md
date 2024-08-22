@@ -44,7 +44,7 @@ h ================================> Commit & push
 And the outpout of the choosen actions being performed, after this line.
 
 ## Recursive actions
-The `a - stage` and `d - diff unstaged`, `D - diff staged` and `f - fetch & diff origin` options are recursive, after the corresponding actions are perfomed the menu automatically opens again, with git status updated in case of `a - stage`.
+The `a - stage` and `d - diff unstaged`, `D - diff staged` and `f - fetch & diff origin` options are recursive, after the corresponding actions are perfomed the menu automatically shows again, with git status updated in case of `a - stage`.
 
 
 ## Scrollback buffer
