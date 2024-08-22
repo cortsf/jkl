@@ -15,7 +15,7 @@ main_menu () {
     echo -ne "\nd - diff unstaged$(tput el)"
     echo -ne "\nD - diff staged$(tput el)"
     echo -ne "\ne - diff origin$(tput el)"
-    echo -ne "\nf - fetch & diff origin$(tput el)"
+    echo -ne "\nf - fetch$(tput el)"
     echo -ne "\ng - merge origin$(tput el)"
     echo -ne "\nh - commit & push$(tput el)"
     echo -ne "\n$(tput el)"
@@ -35,7 +35,7 @@ main_menu () {
 	"d") show_choosen_option "d ================================> Diff unstaged";;
 	"D") show_choosen_option "D ================================> Diff staged";;
 	"e") show_choosen_option "e ================================> Diff origin";;
-	"f") show_choosen_option "f ================================> Fetch & diff origin";;
+	"f") show_choosen_option "f ================================> Fetch";;
 	"g") show_choosen_option "g ================================> Merge origin";;
 	"h") show_choosen_option "h ================================> Commit & push";;
 	"j") show_choosen_option "j ================================> Rebuild $machine";;
@@ -47,7 +47,7 @@ main_menu () {
 
     # Stage
     case $OPERATIONS in
-	"a") git add .; sleep 0.4 && main "$@" 
+	"a") git add . ; sleep 0.4 && main "$@" 
              # sleeps for user to notice the message.
     esac
 
@@ -72,14 +72,12 @@ main_menu () {
 	"e") git diff origin/main --color=always | less; main "$@"
     esac
 
-    # Fetch & diff origin
+    # Fetch
     case $OPERATIONS in
 	"f") 
 	    fetch_out="$(git fetch 2>&1 >/dev/null)"
-	    if [[ "${#fetch_out}" -gt "0" ]]; 
-	    then git diff origin/main --color=always | less
-	    else echo -ne "Nothing to fetch\n"; fi
-	    main_menu "$@"
+	    [[ "${#fetch_out}" -gt "0" ]] && git diff origin/main --color=always | less
+	    main "$@"
     esac
 
     # Merge
