@@ -6,10 +6,6 @@ show_choosen_option () {
     echo -ne "$(tput sgr0)$(tput setaf 5)\n$1$(tput el)$(tput sgr0)\n\n"
 }
 
-do_commit () {
-    git commit -a -m "Switch configuration from '$machine' at: $(date '+%Y_%m_%d-%T')"
-}
-
 do_rebuild () {
     sudo nixos-rebuild --max-jobs "$(nproc)" --flake "$HOME/.dotfiles/nixos#$machine" switch "$@"
 }
@@ -64,19 +60,19 @@ main_menu () {
 	git merge origin/main
     elif [[ "$OPERATIONS" == "h" ]]; then
 	show_choosen_option "h ================================> Commit & push"
-	do_commit
+	git commit -a -m "$(date '+%Y_%m_%d-%T') - From '$machine': Commit & push"
 	git push
     elif [[ "$OPERATIONS" == "j" ]]; then
 	show_choosen_option "j ================================> Rebuild $machine"
 	do_rebuild "$@"
     elif [[ "$OPERATIONS" == "k" ]]; then
 	show_choosen_option "k ================================> Commit, push & rebuild $machine"
-	do_commit
+	git commit -a -m "$(date '+%Y_%m_%d-%T') - From '$machine': Commit, push, & rebuild"
 	git push
 	do_rebuild "$@"
     elif [[ "$OPERATIONS" == "l" ]]; then
 	show_choosen_option "l ================================> Commit, push, update flake.lock & rebuild $machine"
-	do_commit
+	git commit -a -m "$(date '+%Y_%m_%d-%T') - From '$machine': Commit, push, update flake.lock & rebuild"
 	git push
 	nix flake update
 	do_rebuild "$@"
