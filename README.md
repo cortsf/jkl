@@ -25,7 +25,7 @@ s - scan
 d - diff unstaged
 D - diff staged
 e - diff origin
-f - fetch
+f - fetch & diff origin
 g - merge origin
 h - commit & push
 
@@ -43,10 +43,13 @@ h ================================> Commit & push
 
 And the outpout of the choosen actions being performed, after this line.
 
-The `a - stage` and `d - diff` options are recursive, after the corresponding actions (`git add .` and `git diff --color=always | less`, respectively) are perfomed the menu automatically opens again, with git status updated in case of `a - stage`.
+## Recursive actions
+The `a - stage` and `d - diff unstaged`, `D - diff staged` and `f - fetch & diff origin` options are recursive, after the corresponding actions are perfomed the menu automatically opens again, with git status updated in case of `a - stage`.
 
 
+## Scrollback buffer
 `jkl` Doesn't clears the scrollback buffer of your terminal, meaning, at any time after using jkl, (at least, before you kill/clear your terminal) you can inspect both the git status, the choosen action/s from the menu, and the output of the choosen actions. Just like with regular git used from a terminal.
+
 # Screenshots
 Before choosing action/s:
 ![alt text](https://github.com/cortsf/jkl/blob/main/jkl1.png?raw=true)
