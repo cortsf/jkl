@@ -48,13 +48,13 @@ main_menu () {
     # Stage
     case $OPERATIONS in
 	"a") git add .; sleep 0.4 && main "$@" 
-	     # sleeps for user to notice the message.
+             # sleeps for user to notice the message.
     esac
 
     # Scan
     case $OPERATIONS in
-	"s") git secrets --list && sleep 2 && git secrets --scan -r ./
-	     # sleeps for the user to get informed of any existing/non-existing secrets provider/s.
+	"s") git secrets --list && sleep 2 && git secrets --scan -r "$(git rev-parse --show-toplevel)"
+             # sleeps for the user to get informed of any existing/non-existing secrets provider/s.
     esac
 
     # Diff unstaged
