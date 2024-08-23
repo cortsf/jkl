@@ -53,6 +53,7 @@ main_menu () {
     elif [[ "$OPERATIONS" == "f" ]]; then
 	show_choosen_option "f ================================> Fetch"
 	fetch_out="$(git fetch 2>&1 >/dev/null)"
+	echo "$fetch_out" # leave output in the scrollback buffer
 	[[ "${#fetch_out}" -gt "0" ]] && git diff origin/main --color=always | less
 	main "$@"
     elif [[ "$OPERATIONS" == "g" ]]; then
@@ -92,6 +93,8 @@ main_menu () {
 
 
 main() {
+    # make scrollback buffer more readable:
+    echo -e "$(tput setaf 5)\n=================================== Git status$(tput sgr0)\n" 
     clear -x
     git status
     main_menu "$@"
