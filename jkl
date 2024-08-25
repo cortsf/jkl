@@ -33,7 +33,7 @@ main_menu () {
     tput sgr0
     if [[ "$OPERATIONS" == "a" ]]; then
 	show_choosen_option "a ================================> Stage (all)"
-	cd "$(git rev-parse --show-toplevel)"
+	cd "$(git rev-parse --show-toplevel)" || return
 	git add . 
 	sleep 0.4 # sleeps for the user to notice the 'a ===> ...' message.
 	main "$@" 
