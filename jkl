@@ -1,5 +1,3 @@
-cd ~/.dotfiles/nixos || exit 1
-
 machine="$HOSTNAME"
 
 show_choosen_option () {
@@ -35,8 +33,10 @@ main_menu () {
     tput sgr0
     if [[ "$OPERATIONS" == "a" ]]; then
 	show_choosen_option "a ================================> Stage (all)"
-	git add . ; sleep 0.4 && main "$@" 
-	# sleeps for user to notice the message.
+	cd "$(git rev-parse --show-toplevel)"
+	git add . 
+	sleep 0.4 # sleeps for the user to notice the 'a ===> ...' message.
+	main "$@" 
     elif [[ "$OPERATIONS" == "s" ]]; then
 	show_choosen_option "s ================================> Scan"
 	git secrets --list && sleep 2 && git secrets --scan -r "$(git rev-parse --show-toplevel)"
@@ -97,6 +97,7 @@ main() {
     # make scrollback buffer more readable:
     echo -e "$(tput setaf 5)\n=================================== Git status$(tput sgr0)\n" 
     clear -x
+    cd ~/.dotfiles/nixos || exit 1
     git status
     main_menu "$@"
 }
