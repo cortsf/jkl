@@ -5,7 +5,9 @@ show_choosen_option () {
 }
 
 do_rebuild () {
-    sudo nixos-rebuild --max-jobs "$(nproc)" --flake "$HOME/.dotfiles/nixos#$machine" switch "$@"
+    nproc="$(nproc)"
+    echo "";
+    (set -x;  sudo nixos-rebuild --max-jobs "$nproc" --flake "$HOME/.dotfiles/nixos#$machine" switch "$@")
 }
 
 main_menu () {
@@ -102,4 +104,4 @@ main() {
     main_menu "$@"
 }
 
-main
+main "$@"
