@@ -6,7 +6,6 @@ show_choosen_option () {
 
 do_rebuild () {
     nproc="$(nproc)"
-    echo "";
     (set -x;  sudo nixos-rebuild --max-jobs "$nproc" --flake "$HOME/.dotfiles/nixos#$machine" switch "$@")
 }
 
