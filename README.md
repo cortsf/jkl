@@ -69,6 +69,13 @@ This allows to commit & push any (valid) minuscule tweak in you configuration, a
 Only `s - scan` requires [git-secrets](https://github.com/awslabs/git-secrets). You have to provide a secrets provider, using for example: 
 
 ``` bash
-git secrets --add-provider -- cat ~/.my_secrets
+git secrets --add-provider -- gpg /path/to/my_secrets.gpg
 ```
 
+Where `my_secrets.gpg` is just a text file encrypted with `gpg -c /path/to/my_secrets` (dont forget to remove the -unencrypted- original file)
+
+This is the same as using cat without encryption:
+
+``` bash
+git secrets --add-provider -- cat /path/to/my_secrets
+```
