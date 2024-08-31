@@ -41,7 +41,7 @@ main_menu () {
     elif [[ "$OPERATIONS" == "s" ]]; then
 	show_choosen_option "s ================================> Scan"
 	cd "$(git rev-parse --show-toplevel)" || return
-	git secrets --list && sleep 2 && git secrets --scan -r 
+	git secrets --list && sleep 1 && git secrets --scan -r 
         # sleeps for the user to get informed of any existing/non-existing secrets provider/s.
     elif [[ "$OPERATIONS" == "d" ]]; then
 	show_choosen_option "d ================================> Diff unstaged"
