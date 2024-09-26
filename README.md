@@ -1,10 +1,10 @@
 # Assumptions
-- The user has a `~/.dotfiles/nixos/flake.nix` providing `nixosConfigurations.<HOSTNAME>` (See [#2](https://github.com/cortsf/jkl/issues/2) & [#3](https://github.com/cortsf/jkl/issues/3)). Until [#2](https://github.com/cortsf/jkl/issues/2) gets completed, you can use a symlink pointing to another location.
- - The user works mostly on branch `main`. Uses other tools for anything else.
+- The user has a `~/.dotfiles/nixos/flake.nix` providing `nixosConfigurations.<HOSTNAME>`. Until [#7](https://github.com/cortsf/jkl/issues/7) is completed, you can use a symlink pointing to another location.
+- The user works mostly on branch `main`. Uses other tools for anything else.
 - The user doesn't mind automatically generated commit messages. Uses other tools for anything else.
 - The user benefits from having some quick shortcuts only to perform the most common/repetitive tasks on a dotfiles repo. Uses other tools for anything else.
 
-Some flexibility could be added in the future, but the idea is to keep this tool as dumb and simple as possible. Check [#7](https://github.com/cortsf/jkl/issues/7)
+Some flexibility could be added in the future, but the idea is to keep this tool as dumb and simple as possible. Read [Rationale](#rationale) for further explanations.
 
 # Usage
 
@@ -60,10 +60,10 @@ Before choosing action/s:
 After choosing action/s with `j`:
 ![alt text](https://github.com/cortsf/jkl/blob/main/jkl2.png?raw=true)
 
-# Note on the program's name (`jkl`)
-It's not a joke. These three consecutive home row keys used to write the program name on a terminal, the `<Control-J>` you can use to submit the program on most terminals, and any of the (most likely to be used) `h`, `j`,`k`,`l` actions, can be pressed in sequence with a gesture of the hand, that doesn't even qualifies as writing. It takes less than a second to use this command, if you memorize at least the action/s that you use the most.
+# Rationale
+The program's name (`jkl`) is not a joke. These three consecutive home row keys used to write the program name on a terminal, the `<Control-J>` you can use to submit the program on most terminals, and any of the (most likely to be used) `h`, `j`,`k`,`l` actions, can be pressed in sequence with a gesture of the hand, that doesn't even qualifies as writing. It takes less than a second to use this command, if you memorize at least the action/s that you use the most.
 
-This allows to commit & push any (valid) minuscule tweak in you configuration, almost for free. Which is specially useful in a multi computer setup sharing the same configuration.
+This allows to efficiently try, commit & push any (valid) minuscule tweak in you configuration, almost for ee. Which is specially useful in a multi computer setup sharing the same configuration. This is done while keeping the (clean & readable) history on a terminal, without the user having to chdir into any particular folder or provide a machine name, and with the help of some also efficient wrappers around git fetch, merge, stage, diff and nix input/s update.
 
 # Extra deps
 Only `s - scan` requires [git-secrets](https://github.com/awslabs/git-secrets). You have to provide a secrets provider, using for example: 
