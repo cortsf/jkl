@@ -1,5 +1,7 @@
 # Assumptions
-- The user has a `~/.dotfiles/nixos/flake.nix` providing `nixosConfigurations.<HOSTNAME>`. Until [#7](https://github.com/cortsf/jkl/issues/7) is completed, you can use a symlink pointing to another location.
+- The user has a `~/.dotfiles/nixos/flake.nix` providing `nixosConfigurations.<HOSTNAME>`. 
+where `<HOSTNAME>` is the machine name usually with `networking.hostName`.
+Until [#7](https://github.com/cortsf/jkl/issues/7) is completed, you can use a symlink pointing to another dotfiles path.
 - The user works mostly on branch `main`. Uses other tools for anything else.
 - The user doesn't mind automatically generated commit messages. Uses other tools for anything else.
 - The user benefits from having some quick shortcuts only to perform the most common/repetitive tasks on a dotfiles repo. Uses other tools for anything else.
