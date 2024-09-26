@@ -97,7 +97,7 @@ main_menu () {
 
 
 main() {
-    # make scrollback buffer more readable:
+    # Echo (hidden) msg to make scrollback buffer more readable:
     echo -e "$(tput setaf 5)\n=================================== Git status$(tput sgr0)\n" 
     clear -x
     cd ~/.dotfiles/nixos || exit 1
