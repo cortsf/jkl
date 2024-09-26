@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 machine="$HOSTNAME"
 
 show_choosen_option () {
