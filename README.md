@@ -54,6 +54,10 @@ The `a - stage` and `d - diff unstaged`, `D - diff staged`, `e - diff origin` an
 `jkl` Doesn't clears the scrollback buffer of your terminal, meaning, at any time after using jkl, (at least, before you kill/clear your terminal) you can inspect both the git status, the choosen action/s from the menu, and the output of the choosen actions. Just like with regular git used from a terminal.
 
 # Screenshots
+```
+$ jkl
+```
+
 Before choosing action/s:
 ![alt text](https://github.com/cortsf/jkl/blob/main/jkl1.png?raw=true)
 
@@ -63,7 +67,7 @@ After choosing action/s with `j`:
 # Rationale
 The program's name (`jkl`) is not a joke. These three consecutive home row keys used to write the program name on a terminal, the `<Control-J>` you can use to submit the program on most terminals, and any of the (most likely to be used) `h`, `j`,`k`,`l` actions, can be pressed in sequence with a gesture of the hand, that doesn't even qualifies as writing. It takes less than a second to use this command, if you memorize at least the action/s that you use the most.
 
-This allows to efficiently try, commit & push any (valid) minuscule tweak in you configuration, almost for ee. Which is specially useful in a multi computer setup sharing the same configuration. This is done while keeping the (clean & readable) history on a terminal, without the user having to chdir into any particular folder or provide a machine name, and with the help of some also efficient wrappers around git fetch, merge, stage, diff and nix input/s update.
+This allows to efficiently try, commit & push any (valid) minuscule tweak in you configuration, almost for free. Which is specially useful in a multi computer setup sharing the same configuration. This is done while keeping the (clean & readable) history on a terminal, without the user having to ch into any particular folder or provide a machine name, and with the help of some also efficient wrappers around git fetch, merge, stage, diff and nix input/s update.
 
 # Extra deps
 Only `s - scan` requires [git-secrets](https://github.com/awslabs/git-secrets). You have to provide a secrets provider, using for example: 
