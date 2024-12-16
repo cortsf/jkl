@@ -27,6 +27,7 @@ main_menu () {
     echo -ne "\nk - commit, push & rebuild$(tput el)"
     echo -ne "\nl - commit, push, update flake.lock & rebuild$(tput el)"
     echo -ne "\nL - update invididual <input>$(tput el)"
+    echo -ne "\nx - collect garbage$(tput el)"
     echo -ne "\n$(tput el)"
     echo -ne "\n$(tput el)"
     read -r -n 1 OPERATIONS
@@ -90,6 +91,9 @@ main_menu () {
 	tput rc
 	show_choosen_option "L ================================> Update input: $(tput setaf 3)$input_name"
 	nix flake update "$input_name"
+    elif [[ "$OPERATIONS" == "L" ]]; then
+	show_choosen_option "x ================================> Collect garbage"
+	(set -x; sudo nix-collect-garbage -d)
     else
 	tput el; echo ""; exit 1
     fi
