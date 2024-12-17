@@ -91,7 +91,7 @@ main_menu () {
 	tput rc
 	show_choosen_option "L ================================> Update input: $(tput setaf 3)$input_name"
 	nix flake update "$input_name"
-    elif [[ "$OPERATIONS" == "L" ]]; then
+    elif [[ "$OPERATIONS" == "x" ]]; then
 	show_choosen_option "x ================================> Collect garbage"
 	(set -x; sudo nix-collect-garbage -d)
     else
