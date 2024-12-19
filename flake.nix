@@ -11,6 +11,7 @@
     {
       packages.${system}.default = pkgs.writeShellApplication {
         name = "jkl";
+        runtimeInputs = with pkgs; [ bash ncurses less nix git git-secrets ];
         text = builtins.readFile ./jkl;
         bashOptions = [ ];
       };
