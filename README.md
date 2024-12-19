@@ -72,8 +72,17 @@ The program's name (`jkl`) is not a joke. These three consecutive home row keys 
 
 This allows to efficiently try, commit & push any (valid) minuscule tweak in you configuration, almost for free. Which is specially useful in a multi computer setup sharing the same configuration. This is done while keeping the (clean & readable) history on a terminal, without the user having to cd into any particular folder, provide a machine name or commit message, and with the help of some also efficient to use wrappers around git fetch, merge, stage, diff and nix input/s update.
 
-# Extra deps
-Only `s - scan` requires [git-secrets](https://github.com/awslabs/git-secrets). You have to provide a secrets provider, using for example: 
+# Dependencies
+- bash 
+- tput (provided by ncurses)
+- less 
+- nix 
+- git 
+- [git-secrets](https://github.com/awslabs/git-secrets)
+
+All dependencies are provided if you use the flake.
+
+To use git-secrets (with `s - scan`) you have to provide a secrets provider, using for example: 
 
 ``` bash
 git secrets --add-provider -- gpg -qd /path/to/my_secrets.gpg
