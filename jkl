@@ -102,8 +102,8 @@ main_menu () {
 
 
 main() {
-    # Echo (hidden) msg to make scrollback buffer more readable:
-    echo -e "$(tput setaf 5)\n=================================== Git status$(tput sgr0)\n" 
+    echo -e "Jkl - using bash $BASH_VERSION, $(nix --version), $(tput -V) and $(git -v)" # Log versions in scrollback buffer
+    echo -e "$(tput setaf 5)=================================== Git status$(tput sgr0)\n" # Make scrollback buffer more readable
     clear -x
     cd ~/.dotfiles/nixos || exit 1
     git status
