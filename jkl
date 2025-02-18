@@ -63,7 +63,8 @@ main_menu () {
 	main "$@"
     elif [[ "$OPERATIONS" == "g" ]]; then
 	show_choosen_option "g ================================> Merge origin"
-	git merge origin/main
+	git merge origin/main && sleep 1 && main "$@"
+        # sleeps for the user to get briefly informed before showing main menu displaying the  new git status.
     elif [[ "$OPERATIONS" == "h" ]]; then
 	show_choosen_option "h ================================> Commit & push"
 	git commit -a -m "$(date '+%Y_%m_%d-%T') - From '$machine': Commit & push"
