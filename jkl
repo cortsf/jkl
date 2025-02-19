@@ -57,15 +57,15 @@ main_menu () {
     elif [[ "$OPERATIONS" == "f" ]]; then
 	show_choosen_option "f ================================> Fetch"
 	fetch_out="$(git fetch 2>&1 >/dev/null)" # git uses stderr for "chatty messages" that are not errors.
-	echo "$fetch_out" # leave output in the scrollback buffer
+	echo -e "$fetch_out\n" # leave output in the scrollback buffer
 	if [[ "${#fetch_out}" -gt "0" ]]; then
-	    git diff origin/main --color=always | less
+	    git diff origin/main --color=always | less && main "$@"
 	else
-	    echo -e "$(tput cuu1)Nothing to fetch. Bye!\n" && sleep 0.4 && main "$@"
+	    echo -e "$(tput cuu1)$(tput cuu1)Nothing to fetch. Bye!\n" && sleep 0.4 && main "$@"
 	fi
     elif [[ "$OPERATIONS" == "g" ]]; then
 	show_choosen_option "g ================================> Merge origin"
-	git merge origin/main && sleep 1 && main "$@"
+	git merge origin/main && echo "" && sleep 1 && main "$@"
         # sleeps for the user to get briefly informed before showing main menu displaying the  new git status.
     elif [[ "$OPERATIONS" == "h" ]]; then
 	show_choosen_option "h ================================> Commit & push"
@@ -105,11 +105,11 @@ main_menu () {
 
 main() {
     echo -e "$(tput setaf 5)=================================== Git status$(tput sgr0)\n" # Make scrollback buffer more readable
-    clear -x
+    clear -x && echo ""
     cd ~/.dotfiles/nixos || exit 1
     git status
     main_menu "$@"
 }
 
-echo -e "Jkl - using bash $BASH_VERSION, $(nix --version), $(tput -V) and $(git -v)" # Log versions in scrollback buffer
+echo -e "Jkl - using bash $BASH_VERSION, $(nix --version), $(tput -V) and $(git -v)\n" # Log versions in scrollback buffer
 main "$@"
