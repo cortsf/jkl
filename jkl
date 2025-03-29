@@ -39,7 +39,7 @@ main_menu () {
 	cd "$(git rev-parse --show-toplevel)" || return
 	add_out=$(git add . -v)
 	if [[ "${#add_out}" -gt "0" ]]; then echo -e "$add_out\n"; else echo -e "Nothing to add.\n"; fi
-	sleep 1
+	sleep 0.6 
 	main "$@" 
     elif [[ "$OPERATIONS" == "s" ]]; then
 	show_choosen_option "s ================================> Scan"
@@ -62,7 +62,7 @@ main_menu () {
 	if [[ "${#fetch_out}" -gt "0" ]]; then
 	    git diff origin/main --color=always | less && main "$@"
 	else
-	    echo -e "$(tput cuu1)$(tput cuu1)Nothing to fetch.\n" && sleep 1 && main "$@"
+	    echo -e "$(tput cuu1)$(tput cuu1)Nothing to fetch.\n" && sleep 0.6 && main "$@"
 	fi
     elif [[ "$OPERATIONS" == "g" ]]; then
 	show_choosen_option "g ================================> Merge origin"
