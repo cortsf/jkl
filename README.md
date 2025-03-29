@@ -68,7 +68,7 @@ After choosing action/s with `j`:
 ![alt text](https://github.com/cortsf/jkl/blob/main/jkl2.png?raw=true)
 
 Scrollback buffer example:
-![alt text](https://github.com/cortsf/jkl/blob/main/jkl2.png?raw=true)
+![alt text](https://github.com/cortsf/jkl/blob/main/jkl3.png?raw=true)
 
 # Rationale
 The program's name (`jkl`) is not a joke. These three consecutive home row keys used to write the program name on a terminal, the `<Control-j>` you can use to submit the command on most terminals, and any of the (most likely to be used repeateadly) `h`, `j`,`k`,`l` actions, can be pressed in sequence with a gesture of the hand, that doesn't even qualifies as writing. It takes less than a second to use this command, if you memorize at least the action/s that you use the most.
