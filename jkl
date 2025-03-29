@@ -105,7 +105,7 @@ main_menu () {
 
 
 main() {
-    echo -e "$(tput setaf 5)=================================== Git status$(tput sgr0)\n" # Make scrollback buffer more readable
+    echo -e "$(tput setaf 5)=================================== Status$(tput sgr0)\n" # Make scrollback buffer more readable
     clear -x && echo ""
     cd ~/.dotfiles/nixos || exit 1
     git status
