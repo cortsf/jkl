@@ -1,18 +1,19 @@
 #!/usr/bin/env bash
 
-machine="$HOSTNAME"
+if [[ -z "$JKL_COMPUTER_NAME" ]]; then computer_name="$HOSTNAME"; else computer_name="$JKL_COMPUTER_NAME"; fi
+if [[ -z "$JKL_FLAKE_DIR" ]]; then flake_dir="$HOME/.dotfiles/nixos"; else flake_dir="$JKL_FLAKE_DIR"; fi
 
 show_choosen_option () {
     echo -ne "$(tput sgr0)$(tput setaf 5)\n$1$(tput el)$(tput sgr0)\n\n"
 }
 
 do_rebuild () {
-    (set -x; sudo nixos-rebuild --flake "$HOME/.dotfiles/nixos#$machine" switch "$@")
+    (set -x; sudo nixos-rebuild --flake "$HOME/.dotfiles/nixos#$computer_name" switch "$@")
 }
 
 main_menu () {
     tput sc
-    echo -ne "$(tput setab 000; tput setaf 4)\n=================================== Select operations to perform on $(tput setaf 3)${machine}$(tput setaf 4)$(tput el)"
+    echo -ne "$(tput setab 000; tput setaf 4)\n=================================== Select operations to perform on $(tput setaf 3)${computer_name}$(tput setaf 4)$(tput el)"
     echo -ne "\n$(tput el)"
     echo -ne "\na - stage (all)$(tput el)"
     echo -ne "\ns - scan$(tput el)"
@@ -54,35 +55,35 @@ main_menu () {
 	git diff --staged --color=always | less; main "$@"
     elif [[ "$OPERATIONS" == "e" ]]; then
 	show_choosen_option "e ================================> Diff origin"
-	git diff origin/main --color=always | less; main "$@"
+	git diff origin --color=always | less; main "$@"
     elif [[ "$OPERATIONS" == "f" ]]; then
 	show_choosen_option "f ================================> Fetch"
 	fetch_out="$(git fetch 2>&1 >/dev/null)" # git uses stderr for "chatty messages" that are not errors.
 	echo -e "$fetch_out\n" # leave output in the scrollback buffer
 	if [[ "${#fetch_out}" -gt "0" ]]; then
-	    git diff origin/main --color=always | less && main "$@"
+	    git diff origin --color=always | less && main "$@"
 	else
 	    echo -e "$(tput cuu1)$(tput cuu1)Nothing to fetch.\n" && sleep 0.6 && main "$@"
 	fi
     elif [[ "$OPERATIONS" == "g" ]]; then
 	show_choosen_option "g ================================> Merge origin"
-	git merge origin/main && echo "" && sleep 1 && main "$@"
+	git merge && echo "" && sleep 1 && main "$@"
         # sleeps for the user to get briefly informed before showing main menu displaying the  new git status.
     elif [[ "$OPERATIONS" == "h" ]]; then
 	show_choosen_option "h ================================> Commit & push"
-	git commit -a -m "$(date '+%Y_%m_%d-%T') - From '$machine': Commit & push"
+	git commit -a -m "$(date '+%Y_%m_%d-%T') - From '$computer_name': Commit & push"
 	git push
     elif [[ "$OPERATIONS" == "j" ]]; then
-	show_choosen_option "j ================================> Rebuild $machine"
+	show_choosen_option "j ================================> Rebuild $computer_name"
 	do_rebuild "$@"
     elif [[ "$OPERATIONS" == "k" ]]; then
-	show_choosen_option "k ================================> Commit, push & rebuild $machine"
-	git commit -a -m "$(date '+%Y_%m_%d-%T') - From '$machine': Commit, push, & rebuild"
+	show_choosen_option "k ================================> Commit, push & rebuild $computer_name"
+	git commit -a -m "$(date '+%Y_%m_%d-%T') - From '$computer_name': Commit, push, & rebuild"
 	git push
 	do_rebuild "$@"
     elif [[ "$OPERATIONS" == "l" ]]; then
-	show_choosen_option "l ================================> Commit, push, update flake.lock & rebuild $machine"
-	git commit -a -m "$(date '+%Y_%m_%d-%T') - From '$machine': Commit, push, update flake.lock & rebuild"
+	show_choosen_option "l ================================> Commit, push, update flake.lock & rebuild $computer_name"
+	git commit -a -m "$(date '+%Y_%m_%d-%T') - From '$computer_name': Commit, push, update flake.lock & rebuild"
 	git push
 	nix flake update
 	do_rebuild "$@"
@@ -105,12 +106,13 @@ main_menu () {
 
 
 main() {
+    cd "$flake_dir" || exit 1
     echo -e "$(tput setaf 5)=================================== Status$(tput sgr0)\n" # Make scrollback buffer more readable
     clear -x && echo ""
-    cd ~/.dotfiles/nixos || exit 1
     git status
     main_menu "$@"
 }
 
-echo -e "Jkl - using bash $BASH_VERSION, $(nix --version), $(tput -V) and $(git -v)\n" # Log versions in scrollback buffer
+echo -e "Bash $BASH_VERSION, $(nix --version), $(tput -V) and $(git -v)" # Log versions in scrollback buffer
+echo -e "Flake dir: $flake_dir\n" # Log vars in scrollback buffer
 main "$@"
