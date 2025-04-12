@@ -77,7 +77,7 @@ And the outpout of the choosen actions being performed, after this line.
 The `a - stage` and `d - diff unstaged`, `D - diff staged`, `e - diff origin`, `f - fetch`, `g - merge` and `L - update individual <input>` options are recursive, after the corresponding actions are perfomed the menu automatically shows again, with the git status updated.
 
 
-`f - fetch` shows `git diff origin/main` after running `git fetch`, unless there is nothing to fetch, in that case it shows the main menu directly.
+`f - fetch` shows the output of `git diff origin` on `less` after running `git fetch`, unless there is nothing to fetch, in that case it shows the main menu directly.
 
 
 ## Scrollback buffer
