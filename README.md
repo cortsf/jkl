@@ -74,7 +74,7 @@ h ================================> Commit & push
 And the outpout of the choosen actions being performed, after this line.
 
 ## Recursive actions
-The `a - stage` and `d - diff unstaged`, `D - diff staged`, `e - diff origin`, `f - fetch` and `g - merge` options are recursive, after the corresponding actions are perfomed the menu automatically shows again, with the git status updated in case of `a - stage`, `f - fetch` and `g - merge`.
+The `a - stage` and `d - diff unstaged`, `D - diff staged`, `e - diff origin`, `f - fetch`, `g - merge` and `L - update individual <input>` options are recursive, after the corresponding actions are perfomed the menu automatically shows again, with the git status updated.
 
 
 `f - fetch` shows `git diff origin/main` after running `git fetch`, unless there is nothing to fetch, in that case it shows the main menu directly.
