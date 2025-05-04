@@ -81,7 +81,7 @@ The `a - stage` and `d - diff unstaged`, `D - diff staged`, `e - diff origin`, `
 
 
 ## Scrollback buffer
-`jkl` Doesn't clears the scrollback buffer of your terminal, meaning, at any time after using jkl, (at least, before you kill/clear your terminal) you can inspect both the git status, the choosen action/s from the menu, and the output of the choosen actions. Just like with regular git used from a terminal.
+`jkl` Doesn't clears the scrollback buffer of your terminal, meaning, at any time after using jkl, (at least, before you kill/clear your terminal) you can inspect both the git status, the choosen action/s from the menu, and the output of the choosen actions. Just like with regular git/nix used from a terminal.
 
 # Screenshots
 ```
